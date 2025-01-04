@@ -1,0 +1,56 @@
+<!-- JavaScript se používá při programování responzivních webových stránek, 
+ jelikož je schopen aktivně měnit či upravovat obsah oné stránky.  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>01</title>
+    
+</head>
+<body>
+    <!--  Jedna z metod je getElementById() = tato metoda vyhledá v HTML kódu
+        onen do závorek specifikovaný element a následně ho může měnit či upravovat.  -->
+
+    <h2>Seznámení s JavaScriptem</h2>
+
+    <h3>JavaScript umí manipulovat s textem</h3>
+
+    <p id="test">Toto je první text.</p>
+
+    <button type="button" onclick='document.getElementById("test").innerHTML = "Tajná zpráva"'>Klikni</button>
+    <!-- Tato funkce tlačítka po jeho stisknutí změní text <p> pomocí metody innerHTML, neboli zamění původní HTML
+        kód dané části(elementu) za jiný -->
+    
+
+    <h3>Manipulace s obrázky</h3>
+    
+    <!-- Tímto stylem můžeme i manipulovat s obrázky apod. -->
+
+    <img id="OBRAZEK" src="img/cat.jpg" style="width: 300px;">
+
+    <button type="button" onclick="document.getElementById('OBRAZEK').src='img/dog.jpg'">PES</button>
+    <button type="button" onclick="document.getElementById('OBRAZEK').src='img/cat.jpg'">KOCKA</button>
+
+
+    <h3>Manipulace se stylem</h3>
+
+    <!-- JavaScript umí i měnit styly či jiné "style" aspekty HTML - toho se dá např.: využít při přepínání light/dark mode -->
+
+    <p class="text1" id="styl">Určije jen obyčejný text :D</p>
+
+    <button type="button" onclick="document.getElementById('styl').style.border='solid black 2px'">Měnič stylu</button>
+
+    <h3>Shování elementu</h3> <!-- JavaScript umí schovávat určitý obsah. Hlavně ten "otravný". -->
+
+    <div id="otrava" class="otrava">
+        <img src="img/guli.jpg" alt="guli">
+        <p>Jsem otravný div! Nihan guliguliguliguli.</p>
+    </div>
+
+    <button type="button" onclick="document.getElementById('otrava').style.display='none'" style="width: 100px;">Shovat cringe?</button>
+    <button type="button" onclick="document.getElementById('otrava').style.display='block'" style="width: 150px;">CRINGEEEEEEEE</button>
+</body>
+</html>

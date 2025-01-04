@@ -1,0 +1,31 @@
+body{
+    display: grid;
+
+}
+
+button{
+    width: 60px;
+    margin: 10px;
+}
+
+
+.text1{
+    width: 200px;
+}
+
+.otrava{
+    display: grid;
+    grid-template-columns: 2fr 1.7fr;
+}
+
+.otrava p{
+    grid-area: 1 / 2 / 2 / 3;
+    padding-left: 10px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.otrava img{
+    grid-area: 1 / 1 / 2 / 2;
+    width: 100%;
+}

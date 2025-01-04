@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_1</title>
+</head>
+<body>
+    
+<p id="test">Tento text není JS!</p>
+
+<button type="button" onclick="mojeFUNKCE()">JS tlacitko :D</button>
+
+<script>
+    function mojeFUNKCE() {
+        document.getElementById('test').innerHTML = "Fukce z JS ";
+    }
+</script>
+
+</body>
+</html>
+
+<!-- JS funkce se moho nacházet kdekoli klidně i za proměnnou která je volá,
+    jelikož si tlačítko po stisku volá tu konkrétní funkci. 
+    Pokud se jedná o prostý kód bez funkce, ale použije se mimo <script> tak se <script> musí nacházet za onom elementem s id. -->

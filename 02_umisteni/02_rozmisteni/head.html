@@ -1,0 +1,33 @@
+    <!--
+    FUNKCE
+        = blok v JS kódu který se spustí pokud je zavolán
+    EVENT(událost)
+        = chvíle kdy USER něco udělá co spustí FUNKCI např.: zmáčkne BUTTON
+
+    UMÍSTĚNÍ
+        - JS se dá umístit do <body> i do <head> a je jedno kde co je
+        <head>
+            - zde se většinou umisťují JS funkce které se později volají v <body>
+                
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03</title>
+    <script>
+        function mojeFUNKCE() {
+            document.getElementById('test').innerHTML = "Fukce z JS ";
+        }
+    </script>
+</head>
+<body>
+    
+<p id="test">Tento text není JS!</p>
+
+<button type="button" onclick="mojeFUNKCE()">JS tlacitko :D</button>
+
+</body>
+</html>

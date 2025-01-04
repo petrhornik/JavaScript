@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_01</title>
+</head>
+<body>
+    
+    <h1>Výstup pomocí innerHTML</h1>
+    <p>Nějaký random text</p>
+
+    <p id="test"></p>
+    <h3 id="priklad"></h3>
+
+    <script>
+        document.getElementById("priklad").innerHTML = 5 + 6; /*Doteď jsem nevěděl že počítat pomocí JS je tak EZ XD*/
+        document.getElementById("test").innerHTML = "Toto je výstup innerHTML příkladu 5 + 6";
+    </script>
+
+    <!-- Klasický innerHTML = přidá či změní HTML obsah daná části s urč. id. Nejvíc jednoduchá cesta jak zobrazovat/měnit data v HTML -->
+
+</body>
+</html>
