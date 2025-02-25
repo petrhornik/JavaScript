@@ -335,9 +335,489 @@ např.:  1 === 1; rovno
                     console.log(brokenSentence.toUpperCase());
                     výstup: IT WOULD NOT KILL YOU TO LISTEN TO ME FOR A BIT...
 
-**konec 05-StringManipulation.md**
+
+**kolekce**
+
+*2 způsoby*     - index based = array - 
+                -key based = map, set
+
+    kolekce = vestavěné objekty, mohou obsahovat i více datových typů
+
+1) Array (pole)
+
+    = list/pole hodnot(objektů) na které můžeme přistupovat pomocí indexu (počítáme od 0), každý objekt má své pořadové číslo
+
+    1.1) konstrukce
+        
+        způsoby zápisu:
+
+            const fruits = new Array("apple", "banana", "cherry"); <- objekty obsažené v poli
+            const numbers = Array(1, 2, 3, 4, 5);
+            const carManufacturers = ["Toyota", "Honda", "Ford", "Chevrolet"];
+            const weather = Array.of("sunny", "rain", "apocalypse");
+
+        - délku arraye lze určit pomocí .length (fruits.length)
+        - můžeme vytvořit i prázdný array a jen definovat jeho délku
+
+            způsoby zápisu: 
+                const emptyArray1 = new Array(42);
+                const emptyArray2 = Array(42);
+        
+                const emptyArray3 = [];
+                emptyArray3.length = 42;
+
+        - délku můžeme upravovat i později pomocí .length = {pocet_objektu}
+
+                > numbers.length = 6;
+                výstup: [ 1, 2, 3, 4, 5, <1 empty item> ]
+
+    1.2) manipulace s elementy **- DOPSAT!!!!!**
+
+        - položky můžeme i přenastavovat i když už jsou určené
+
+                > numbers[0] = 42;  <- 1 přepíšeme na 42
+                vystup: [ 42, 2, 3, 4, 5, <1 empty item> ]
+
+        - pokud chci přidat něco na konec array tak mužu použít length
+
+            > numbers[numbers.length] = 60 <- lenght počítá od 1, ale array se počítá od 0, proto když máme 10 objektů počítaných od nuly a numbers.length vypíše do [10] tak to zastupuje jakoby 11. pozici v array
+            výstup: [ 42, 2, 3, 4, 5, <1 empty item>, 60 ]
+
+    1.3) funkce pro array
+
+        1.3.1) .concat()
+
+            = spojí více arrayů do hromady
+            - bere 1 až více parametrů
+
+            např.: const newArray = weather.concat(carManufacturers)
+                    výstup: [
+                                'sunny',
+                                'rain',
+                                'apocalypse',
+                                'Toyota',
+                                'Honda',
+                                'Ford',
+                                'Chevrolet'
+                            ]
+
+        1.3.2) .push()
+
+            = na konec arraye vloží prvek
+
+                např.: carManufacturers.push("Tesla")
+                        výstup: [ 'Toyota', 'Honda', 'Ford', 'Chevrolet', 'Tesla' ]
+        1.3.2) .pop()
+
+            = z konce arraye prvek odstraní
+
+                např.: carManufacturers.pop(); <- smaže Teslu
+                        výstup: [ 'Toyota', 'Honda', 'Ford', 'Chevrolet' ]
+
+                alternativní zápis .pop():
+
+                    carManufactuers.length -= 1
+                    výpis: smaže poslední položku jelikož se zmenší celková délka
+
+        1.3.3) .slice()
+
+            = vypíše jen konkrétní část arraye dle počáteční a koncové index hodnoty(stačí když je uvedena alespoň počáteční)
+
+            např:   const newArray = weather.concat(carManufacturers)
+                    console.log(newArray.slice(2, 4))
+                    výstup: [ 'apocalypse', 'Toyota' ]
+
+        1.3.4)
 
 
+        1.3.5) .sort()
+
+            = roztřídí to dané pole (dle abecedy s důrazem na velká a malá písmena či čísla velikostně apod.)
+
+            - pokud chceme třídit specificky tak si můžeme napsat i vlastní třídící funkce a následně název této funkce uvét do () u sort
+
+2) Map
+
+    = list klíčových hodnot, nesmí být serializovaná (klíč a jeho hodnota)
+
+    2.1) konstrukce
+
+        - zakládáme pomocí new
+            const pizzaMenu = new Map();
 
 
+    2.2) funkce
 
+        2.2.1) .set()
+
+            = přidání hodnot do mapy
+
+                pizzaMenu.set("Margherita", 200); <- název klíčové položky je margherita a klíčový prvek je 200
+                pizzaMenu.set("Pepperoni", 250);
+                pizzaMenu.set("Hawaiian", 280);
+
+            > console.log("What is the price of Margherita?", pizzaMenu.get("Margherita"));
+            výstup: What is the price of Margherita? 200
+
+        
+        2.2.2) .has()
+
+            = kontrola existence klíčového prvky s názvem
+
+        2.2.3) .size
+
+
+        2.2.4) .delete
+
+            = smaže klíčovou hodnotu pro uvedený název
+
+                > pizzaMenu.delete("Hawaiian");
+                > console.log(pizzaMenu);
+                výstup: Map(2) { 'Margherita' => 200, 'Pepperoni' => 250 } <- odstranili jsme položku hawaiian
+
+        
+        2.2.5) .clear()
+
+            = smaže celý obsah mapy
+                
+                > pizzaMenu.clear();
+                výstup: Map(0) {}
+
+3) set
+
+    = list unikátních hodnot(nemůže obsahuvat stejnou hodnotu vícekrát)
+
+    3.1) konstrukce
+
+        = manipuluje se pomocí funkcí
+        - nový set vytvořím opět pomocí new
+            
+            const musicStyles = new Set();
+
+    3.2) funkce
+
+        3.2.1) .add()
+
+            - podobné jako fce. set z mapy
+            = přidává hodnoty do setu
+
+            např:
+                    musicStyles.add("Rock");
+                    musicStyles.add("Pop");
+                    musicStyles.add("Rap");
+                    výstup: Set(3) { 'Rock', 'Pop', 'Rap' }
+
+            - pokud se pokusím přidat hodnotu, která už v setu existuje tak se nic nestane, jelikož nemůžeme mít 2 stejné hodnoty (každá musí být unikátní)
+
+        3.2.2) .has()
+
+            = kontrola jestli set obsahuje daný objekt/hodnotu
+
+            např.:
+                > console.log("Does music styles contains Rap?", musicStyles.has("Rap"));
+                výstup: Does music styles contains Rap? true
+
+                > console.log("Does music styles contains Jazz?", musicStyles.has("Jazz"));
+                výstup: Does music styles contains Jazz? false
+
+        3.2.3) .size
+
+            = pro kontrolu velikosti (počtu položek) setu
+
+        3.2.4) .delete()
+
+
+        3.2.5) .clear()
+
+**Rozhodování**
+
+= užitečné pro programování
+
+1) If, Else
+
+    = základní rozhodování pokud platí tak...., pokud neplatí tak......
+
+    pokud informace v if (if(zde)) budou pravdivé(true), tak se provede if
+    - v opačném případě se if neprovede a bude se pokračovat dál pomocí else či jiným if (nebo dál v kódu pokud další if ani else neexistuje)
+    
+
+    např.: let doIHaveEnoughMoney = true;
+
+            if (doIHaveEnoughMoney) {
+                console.log("I can buy this!");
+            }
+
+            console.log("Leaving shop");
+            výstup: I can buy this!
+
+            const legalDrinkingAge = 18;
+            let myAge = 17;
+
+            if (myAge > legalDrinkingAge) {
+                console.log("Yes, I can!");
+            } else {
+            console.log("No, I can't!");
+            }
+
+            výstup: No, I can't!
+
+            
+            let myAge = 40;
+            let haveFireworksLicense = true;
+
+            let fireworksCategory;
+
+            if (haveFireworksLicense) {
+                fireworksCategory = "F4";
+            } else if (myAge >= 21) {
+                fireworksCategory = "F3";
+            } else if (myAge >= 18) {
+                fireworksCategory = "F2";
+            } else if (myAge >= 15) {
+                fireworksCategory = "F1";
+            } else {
+                fireworksCategory = "None";
+            }
+
+            console.log("I can buy fireworks of category:", fireworksCategory);
+            výstup: I can buy fireworks of category: F4
+
+    - else if = je obyčenný else který na sebe ihned navazuje ifem
+
+2) AND, OR, NOT, SWITCH, Ternary Oper.
+
+    2.1) AND
+        = všechny podmínky musí být pravdivé jinak automaticky false
+        - zapisuje se &&
+
+        např.:
+
+            const minAge = 12;
+            const minHeight = 140;
+
+            let height = 120;
+            let age = 15;
+
+            if (height >= minHeight && age >= minAge) {
+           console.log("You can ride the rollercoaster!");
+            } else {
+                console.log("Sorry, you can't ride the rollercoaster");
+            }
+
+            výstup: Sorry, you can't ride the rollercoaster
+
+
+    2.2) OR
+        = alespoň jedna z podmínek musí být pravdivá, poté bude if true
+        - zapisujeme jako || (2 pipy)
+
+        např.: 
+
+            let beerInsideFridge = true;
+            let beerInsideCupboard = true;
+            let beerInsideBasement = true;
+
+            if (beerInsideFridge || beerInsideCupboard || beerInsideBasement) {
+                console.log("We have some beer at home!");
+            } else {
+                console.log("Time to go shopping!");
+            }
+
+            výstup: 
+
+    2.3) NOT
+
+        = unární operátor, používá reverzní boolean hodnotu
+        - zapisujeme jako !
+
+        např.: let lightSwitchIsOn = false;
+
+                console.log("Light is on: " + lightSwitchIsOn);
+
+                //Toggle the light switch
+                lightSwitchIsOn = !lightSwitchIsOn;
+
+                console.log("Light is on: " + lightSwitchIsOn);
+
+                //Toggle the light switch
+                lightSwitchIsOn = !lightSwitchIsOn;
+
+                console.log("Light is on: " + lightSwitchIsOn);
+        
+        - dá se využít i u IF statementu(pro zkracování)
+
+            const haveToGoToWork = true;
+
+            if (haveToGoToWork) {
+                //wake up...
+            } else {
+                console.log("I can sleep longer!");
+            }
+
+    2.4) switch
+
+    = je schopen obsahovat několik různých bloků(case) a dle urč proměnné vykoná právě ten case který má název jako ona proměnná
+    - ukončujeme pomocí break
+        - bez break by se kromě onoho urč. case provedou i ty pod ním
+    - default = provede se tento case pokud se žádná jiná case neshoduje s názvem prom.
+        - vždy se "schoda" testuje jako poslední, zapisujeme na konec
+    např.: 
+                //Asian grading scale
+                let grade = "B";
+
+                switch (grade) {
+                    case "A":
+                        console.log("Average");
+                        break;
+                    case "B":
+                        console.log("Bellow Average");
+                        break;
+                    case "C":
+                        console.log("Can't eat dinner");
+                        break;
+                    case "D":
+                        console.log("Don't come home");
+                        break;
+                    case "F":
+                        console.log("Find a new family");
+                        break;
+                    default:
+                        console.log("Invalid grade");
+                        break;
+                }
+
+    2.5) ternary operator
+
+    = např.: určuje jestli se část webu bude renderovat či ne
+    - obsahuje vždy 3 proměnné
+
+    zápis: podmínka ? pokud_pravda_tak : pokud_nepravda_tak
+
+        //How was lunch?
+        let delicious = false;
+
+        console.log("How was lunch?", delicious ? "Delicious!" : "Barely edible!");
+
+**Cykly (Loops)**
+
+= aby se kód zopakoval vícekrát než 1
+
+1) While
+
+    = univerzální, cyklus který se bude opakovat dokud je pravdivá podmínka
+    - cyklus se přeruší pomocí break nebo zrušení platnosti podmínky
+
+    zápis:
+        while (PODMINKA) {
+        // code to run
+
+        //update condition or break
+    }
+
+    např.:
+        // returns random integer between 0 and max (exclusive)
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        const requiredPointsToSucceed = 90;
+
+        let passed = false;
+        let tries = 0;
+
+        while (!passed) {
+           tries++;
+
+            const points = getRandomInt(101);
+
+            console.log(`Try ${tries}: ${points} points`);
+
+            if (points >= requiredPointsToSucceed) {
+                passed = true;
+            }
+        }
+
+        console.log(`You passed after ${tries} tries congratulation!`);
+
+2) DO WHILE
+
+    = kód je spuštěn min. 1 než bude zkontrolována platnost podmínky
+
+3) FOR
+
+    = je určeno kolikrát se zopakuje
+
+    - zápis: for (initializer; condition; final-expression) {
+                // code to run
+             }
+            initializer = definujeme to čím se bude určovat platnost cyklu
+            condition = podmínka dle kderé se určuje jestli se bude cykl opakovat
+            final-expression = kód co proběhne vždy po provedení cyklu
+
+    např.: // script execution
+
+            // returns random integer between 0 and max (exclusive)
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+            }
+
+            // for loop
+            const testToGrade = 26;
+
+            for (let i = 0; i < testToGrade; i++) {
+                console.log("Test graded, points:", getRandomInt(101));
+            }
+
+            console.log("All test have been graded!");
+
+    tip: initializer lze definovat samostatně a condition se dá zapsat i do cyklu jako if a break
+
+4) loopování mezi kolekcemi
+
+    = používame dohromady kolekce(array) a cykly
+
+    např.: const euCountriesArray = [
+                "Germany",
+                "France",
+                "Italy",
+                "Spain",
+                "Poland",
+                "Netherlands",
+                "Belgium",
+                "Greece",
+            ];
+
+            for (let i = 0; i < euCountriesArray.length; i++) {
+                console.log(euCountriesArray[i].toUpperCase());
+            }
+
+    4.1) for of
+
+        = vrací variable z kolekce
+
+        zápis: for (const variable of collection) {
+                    // code to run
+                }
+
+        - DOPSAT!!!!
+
+    4.2) forEach
+
+        = použití funkce pro každého člena kolekce
+
+        zápis: collection.forEach(function);
+
+    4.3) map
+
+        - dostupné pouze pro arraye jejíchž proměnné se mohou měnit
+        = se chopné udělat z arraye či z funkce ve které je nový array s použitím definovaných funkcí (původnímu arrayi se nic nestalo)
+
+        zápis: const newCollection = collection.map(function);
+
+    4.4) filter
+
+        = z arraye schopen vytvořit nový array jen s těmi členy, kteří splňují předem definované podmínky
+
+        zápis: const newCollection = collection.filter(function);
+
+        
