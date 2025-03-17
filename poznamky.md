@@ -700,7 +700,7 @@ např.:  1 === 1; rovno
 
 **Cykly (Loops)**
 
-= aby se kód zopakoval vícekrát než 1
+= aby se kód zopakoval vícekrát než 1, na základě podmínek a jejich případné platnosti opakuje urč. část kódu
 
 1) While
 
@@ -793,7 +793,8 @@ např.:  1 === 1; rovno
 
     4.1) for of
 
-        = vrací variable z kolekce
+        = vrací variable z kolekce(array), můžeme pracovat s jednotlivými hodnotami v arrayi
+        -např.: pokud array bude obsahovat 7 hodnot tak se for zopakuje 7 krát
 
         zápis: for (const variable of collection) {
                     // code to run
@@ -814,10 +815,222 @@ např.:  1 === 1; rovno
 
         zápis: const newCollection = collection.map(function);
 
+        cv17
+        
     4.4) filter
 
         = z arraye schopen vytvořit nový array jen s těmi členy, kteří splňují předem definované podmínky
 
         zápis: const newCollection = collection.filter(function);
 
+        cv17
+    
+**Funkce**
+
+= bloky/části kódu které můžeme opakovaně používat a pomocí "názvů funkce" si je můžeme volat
+- slouží k lepší přehlednosti a čitelnosti kódu
+*tip* - funkce pro opakované používání by měly být jednoduché
+
+    1) spouštění
+
+    - funkce spouštíme tzv. VOLÁNÍM
+            - voláme pomocí zadání názvu fce. a přídáním závorek () např.: mojefunkce() <- do () můžeme zapsat např.: nějakou proměnnou pro fci.
+            - pokud nepřidáme (), tak fce. nebude zavolána!! - místo toho se např. v prohlížečí vypíše kód co fce obsahuje
+            - při volání neexistující fce. nám to vrátí error (errory se mohou vždy jmenovat jinak)
+
+        např.:  console.log("Tady jsem!!"); <- funkce console.log + proměnná na zpracování Tady jsem!!
+
+    2) Tvoření fcí.
+
+    - 3 způsoby : deklarační, anonymní funkce, arrow funkce
+
+        2.1) deklarace funkce
         
+        = klasická funkce se specifickým jménem (také se jim říká pojmenované fce. (named function))
+        - tyto funkce se mohou volat i před tím než jsou definováný (kódem psaným nad fcí.) díky tzv. zdvihu (hoisting)
+
+        -syntaxe: function functionName() {
+                    //code to execute
+                  }
+
+                  functionName();
+        
+        - fci. deklarujeme pomocí příkazu function, poté zadáme název naší fce. poté () do kterých můžeme psát proměnné, které ve fci. použijeme . Následně do {} píšeme příslušný kód pro onu funkci (jednotlivé příkazy musí být odděleny ;). Za {} se ; nepíše!!
+
+        - aby nám fce. po jejím vykonání něco VRÁTILA tak musíme použít příkaz return např.: return 0; = vypíše 0 NEBO return vysledek; = vypíše proměnnou vysledek
+
+        - např.:    function functionName() {
+                        //code to execute
+
+                        return 0;
+                    }
+
+                    functionName();
+
+        - fukce může u jména v () obsahovat parametry/proměnné se kterými se ve fci. manipuluje, parametrů může být více než 1, 
+
+        - např.:    function functionName(variableName) {
+                        //code to execute
+
+                        return variableName;
+                    }
+
+                    functionName(0);
+
+        *tip* - pokud zavoláme fci. a nevyplníme požadované proměnné, tak se funkce provede s hodnotami proměnných undefined :D
+
+        - hodnoty proměnných můžeme definovat dopředu hodnoty argumentů, pokud by náhodou nebyly hodnoty uvedeny u volání fce.
+                - nevznikne hodnota undefined!!!
+
+        - např.:     function functionName(variableName = 0) {
+                        //code to execute
+
+                        return 0;
+                    }
+
+                    functionName();
+
+        parametrová rest syntaxe
+
+            = další zp. jak zadat parametry do fce.
+                - fce. muže používat nedefinovaný počet argumentů/prom. a přistupovat k nim jako k listu(arrayi)
+                - jen 1 tato syntaxe může být použíta jako definice, ale může být kombinována s jinnými parametry
+        
+            - např.: function functionName(variableName, ...restOfVariables) {
+                        //code to execute
+
+                        return 0;
+                    }
+
+                    functionName(20, 30, 40);
+
+        2.2) function expression (anonymní fce.)
+
+        = použijeme pokud nechceme či nepotřebujeme použít fci. pro celkový rozsah
+
+        - syntaxe:  const myFunction = function () {
+                        //code to execute
+
+                        return 0;
+                    }
+
+                    myFunction();
+
+        - na rozdíl od deklarace zde tvoříme fci. jakožto konstatní proměnnou
+        - nemůže být zavolána, jednoduše fci. narveme ke konkrétní části kódu a nepíšeme ji samostatně
+        - dobrá pomůcka pro zkracování kódu
+        - tyto fce. mohou být pojmenovány
+
+        - např.: Předěláme fci. z deklarační do expression formy logováním každého člena kolekce/listu
+        
+                    function justLog(string) {
+                        return console.log(string);
+                    }
+
+                    const euCountriesArray = [
+                        "Germany",
+                        "France",
+                        "Italy",
+                        "Spain",
+                        "Poland",
+                        "Netherlands",
+                        "Belgium",
+                        "Greece",
+                    ];
+                    console.log(euCountriesArray);
+
+                    euCountriesArray.forEach(justLog);
+
+                        |           |           |
+                        V           V           V
+                    
+                    // script execution
+
+                    const euCountriesArray = [
+                        "Germany",
+                        "France",
+                        "Italy",
+                        "Spain",
+                        "Poland",
+                        "Netherlands",
+                        "Belgium",
+                        "Greece",
+                    ];
+                    console.log(euCountriesArray);
+
+                    euCountriesArray.forEach(function (value) {  <- v tomto případě nemusí fce. obsahovat return
+                        console.log(value);
+                    });
+
+        - IIFE (immediately invoked function expression)
+
+            = speciální typ function expression, který je ihned vyvoláván
+            - používáno dříve, dnes už moc ne
+
+            např.: //script execution
+
+                    (function () {
+                        console.log("IIFE");
+                    })();
+
+        2.3) arrow funkce
+
+        = syntaxe zápisu podobná jako expression, ALE nelze zaměňovat
+
+        - syntaxe:  const myFunction = () => {
+                        //code to execute
+                    };
+
+                    myFunction();
+        
+    - zapisujeme definováním proměnné funkce, následně () + můžeme do nich dopsat parametry, poté => (šipka), do {} píšeme kód fce.
+        - pro vracení hodnot musí fce. tak jako všechny ostatní obsahovat return jinak undefined = velký špatný!!
+
+    - další zp. zápisu: 
+
+        const myFunction2 = a => a * a;
+
+        console.log(myFunction2(7));
+
+    - fce. i přes chybějící závorky funguje (syntaxe je stejná jako kdyby tam ty závorky byly a není potřeba return)
+
+    - změna deklarace na arrow
+
+            function justLog(string) {
+                return console.log(string);
+            }
+
+            const euCountriesArray = [
+                "Germany",
+                "France",
+                "Italy",
+                "Spain",
+                "Poland",
+                "Netherlands",
+                "Belgium",
+                "Greece",
+            ];
+            console.log(euCountriesArray);
+
+            euCountriesArray.forEach(justLog);
+
+                |           |           |
+                V           V           V
+
+            const euCountriesArray = [
+                "Germany",
+                "France",
+                "Italy",
+                "Spain",
+                "Poland",
+                "Netherlands",
+                "Belgium",
+                "Greece",
+            ];
+            console.log(euCountriesArray);
+
+            euCountriesArray.forEach((value) => {
+                console.log(value);
+            }); 
+    
+    3) parametry vs argumenty
