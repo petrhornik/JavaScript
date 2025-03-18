@@ -738,6 +738,8 @@ např.:  1 === 1; rovno
         }
 
         console.log(`You passed after ${tries} tries congratulation!`);
+    
+    - můžeme zapsat i pomocí if statementu s break příkazewm
 
 2) DO WHILE
 
@@ -791,6 +793,7 @@ např.:  1 === 1; rovno
                 console.log(euCountriesArray[i].toUpperCase());
             }
 
+            - pokud bude hodnota i menší než celkový počet položek v arrayi tak se bude cykl opakovat 
     4.1) for of
 
         = vrací variable z kolekce(array), můžeme pracovat s jednotlivými hodnotami v arrayi
@@ -805,6 +808,7 @@ např.:  1 === 1; rovno
     4.2) forEach
 
         = použití funkce pro každého člena kolekce
+        - funkce se vykoná pro každou položku kolekce
 
         zápis: collection.forEach(function);
 
@@ -812,6 +816,7 @@ např.:  1 === 1; rovno
 
         - dostupné pouze pro arraye jejíchž proměnné se mohou měnit
         = se chopné udělat z arraye či z funkce ve které je nový array s použitím definovaných funkcí (původnímu arrayi se nic nestalo)
+        - pro každý prvek či určité prvky kolekce se provede nějaká fce. a ony prvky se zařadí do nové kolekce(mapy)
 
         zápis: const newCollection = collection.map(function);
 
@@ -824,6 +829,8 @@ např.:  1 === 1; rovno
         zápis: const newCollection = collection.filter(function);
 
         cv17
+
+    tip: filter a map můžeme chainovat za sebe(NA POŘADÍ ZÁLEŽÍ!!!)
     
 **Funkce**
 
@@ -843,52 +850,53 @@ např.:  1 === 1; rovno
     2) Tvoření fcí.
 
     - 3 způsoby : deklarační, anonymní funkce, arrow funkce
+    - pro funkci nemusí být definována proměnná, bude fungovat i tak s onou proměnnou jako undefined
 
         2.1) deklarace funkce
         
-        = klasická funkce se specifickým jménem (také se jim říká pojmenované fce. (named function))
-        - tyto funkce se mohou volat i před tím než jsou definováný (kódem psaným nad fcí.) díky tzv. zdvihu (hoisting)
+            = klasická funkce se specifickým jménem (také se jim říká pojmenované fce. (named function))
+            - tyto funkce se mohou volat i před tím než jsou definováný (kódem psaným nad fcí.) díky tzv. zdvihu (hoisting)
 
-        -syntaxe: function functionName() {
-                    //code to execute
-                  }
+            -syntaxe: function functionName() {
+                        //code to execute
+                      }
 
-                  functionName();
+                      functionName();
         
-        - fci. deklarujeme pomocí příkazu function, poté zadáme název naší fce. poté () do kterých můžeme psát proměnné, které ve fci. použijeme . Následně do {} píšeme příslušný kód pro onu funkci (jednotlivé příkazy musí být odděleny ;). Za {} se ; nepíše!!
+            - fci. deklarujeme pomocí příkazu function, poté zadáme název naší fce. poté () do kterých můžeme psát proměnné, které ve fci. použijeme . Následně do {} píšeme příslušný kód pro onu funkci (jednotlivé příkazy musí být odděleny ;). Za {} se ; nepíše!!
 
-        - aby nám fce. po jejím vykonání něco VRÁTILA tak musíme použít příkaz return např.: return 0; = vypíše 0 NEBO return vysledek; = vypíše proměnnou vysledek
+            - aby nám fce. po jejím vykonání něco VRÁTILA tak musíme použít příkaz return např.: return 0; = vypíše 0 NEBO return vysledek; = vypíše proměnnou vysledek
 
-        - např.:    function functionName() {
-                        //code to execute
+            - např.:    function functionName() {
+                            //code to execute
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    functionName();
+                        functionName();
 
-        - fukce může u jména v () obsahovat parametry/proměnné se kterými se ve fci. manipuluje, parametrů může být více než 1, 
+            - fukce může u jména v () obsahovat parametry/proměnné se kterými se ve fci. manipuluje, parametrů může být více než 1, 
 
-        - např.:    function functionName(variableName) {
-                        //code to execute
+            - např.:    function functionName(variableName) {
+                            //code to execute
 
-                        return variableName;
-                    }
+                            return variableName;
+                        }
 
-                    functionName(0);
+                        functionName(0);
 
-        *tip* - pokud zavoláme fci. a nevyplníme požadované proměnné, tak se funkce provede s hodnotami proměnných undefined :D
+            *tip* - pokud zavoláme fci. a nevyplníme požadované proměnné, tak se funkce provede s hodnotami proměnných undefined :D
 
-        - hodnoty proměnných můžeme definovat dopředu hodnoty argumentů, pokud by náhodou nebyly hodnoty uvedeny u volání fce.
+            - hodnoty proměnných můžeme definovat dopředu hodnoty argumentů, pokud by náhodou nebyly hodnoty uvedeny u volání fce.
                 - nevznikne hodnota undefined!!!
 
-        - např.:     function functionName(variableName = 0) {
-                        //code to execute
+            - např.:     function functionName(variableName = 0) {
+                            //code to execute
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    functionName();
+                        functionName();
 
         parametrová rest syntaxe
 
@@ -906,12 +914,12 @@ např.:  1 === 1; rovno
 
         2.2) function expression (anonymní fce.)
 
-        = použijeme pokud nechceme či nepotřebujeme použít fci. pro celkový rozsah
+            = použijeme pokud nechceme či nepotřebujeme použít fci. pro celkový rozsah
+            - funkce bude dostupná jen v našem scriptu a nikdo s ní nebude moci manipulovat
 
         - syntaxe:  const myFunction = function () {
                         //code to execute
 
-                        return 0;
                     }
 
                     myFunction();
@@ -973,7 +981,7 @@ např.:  1 === 1; rovno
                         console.log("IIFE");
                     })();
 
-        2.3) arrow funkce
+    2.3) arrow funkce
 
         = syntaxe zápisu podobná jako expression, ALE nelze zaměňovat
 
@@ -983,18 +991,18 @@ např.:  1 === 1; rovno
 
                     myFunction();
         
-    - zapisujeme definováním proměnné funkce, následně () + můžeme do nich dopsat parametry, poté => (šipka), do {} píšeme kód fce.
+        - zapisujeme definováním proměnné funkce, následně () + můžeme do nich dopsat parametry, poté => (šipka), do {} píšeme kód fce.
         - pro vracení hodnot musí fce. tak jako všechny ostatní obsahovat return jinak undefined = velký špatný!!
 
-    - další zp. zápisu: 
+        - další zp. zápisu: 
 
-        const myFunction2 = a => a * a;
+            const myFunction2 = a => a * a;
 
-        console.log(myFunction2(7));
+            console.log(myFunction2(7));
 
-    - fce. i přes chybějící závorky funguje (syntaxe je stejná jako kdyby tam ty závorky byly a není potřeba return)
+        - fce. i přes chybějící závorky funguje (syntaxe je stejná jako kdyby tam ty závorky byly a není potřeba return)
 
-    - změna deklarace na arrow
+        - změna deklarace na arrow
 
             function justLog(string) {
                 return console.log(string);
@@ -1034,3 +1042,7 @@ např.:  1 === 1; rovno
             }); 
     
     3) parametry vs argumenty
+
+        = to samé, jen se tomu jinak říká
+            - parametr - název pro deklarovanou proměnnou u funkce
+            - argument - proměnná co se zadává do funkce při volání
