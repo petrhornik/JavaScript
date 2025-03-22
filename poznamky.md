@@ -1041,8 +1041,148 @@ např.:  1 === 1; rovno
                 console.log(value);
             }); 
     
-    3) parametry vs argumenty
+    parametry vs argumenty
 
         = to samé, jen se tomu jinak říká
             - parametr - název pro deklarovanou proměnnou u funkce
             - argument - proměnná co se zadává do funkce při volání
+        
+    Funkce vs Metody
+
+        - funkce = prostě basic funkce moréé!
+        - metoda = funkce definovaná uvnitř objektu
+
+    3) zpětné volání funkcí (Func. callback)
+
+        = fukce očekává že dostane jinou funkci, funguje podobně jako map, filter, array
+
+        tip - pro jistotu aby nevznikla chyba při spuštění se musíme ujistit že to co do fce. voláme je oravdu funkce
+
+        např.: 
+
+                function func(callMeFunc) {
+                    if (!callMeFunc) {
+                        console.error("Function was undefined");
+                        return;
+                    }
+
+                    if (typeof callMeFunc !== "function") {
+                        console.error("Not a function");
+                        return;
+                    }
+
+                    callMeFunc();
+                }
+
+                func();
+                func(10);
+                func(startCar); //this is function defined above
+
+        tip - Ve výše uvedeném příkladu nejprve kontrolujeme, zda zadaná hodnota není nedefinovaná. Tato konstrukce se často používá i při kontrole jiných funkcí, protože je univerzální a pracuje na principu rovnosti, kdy se nedefinovaná rovná false (specifické pro Javascript). Další kontrola je, zda je zadaná proměnná funkcí, abychom nevykonali něco, co není funkcí.
+
+    4) Předávání argumentů
+
+        = je rozdíl ve vkládání argumentů do fcí. a co se s nimi stane. rozdíl je v tom jestli je argument typu object či nikoli
+
+        4.1) pass by value (dle hodnoty)
+
+            = argumenty NEJSOU objekty, hodnoty argumentů budou zkopírovány do fce. a změny této hodnoty se NEBUDOU šířit ven mimo fci.
+
+            např.:
+
+                // function which tries to modify provided value
+                function modifyArgument(x) {
+                    x = 5;
+
+                    console.log("X inside:", x); // 5
+                }
+
+                let x = 0;
+
+                console.log("X before:", x); // 0
+
+                modifyArgument(x);
+
+                console.log("X after:", x); // 0
+
+        4.2) pass by sharing (průchod sdílením)
+
+            = argumenty JSOU objekty, ODKAZ na objekt se zkopíruje do funkce, objekt může být modifikován a tato modifikace bude k dispozici i po skonšení fukce, přiřazení hodnoty samotnému argumentu se nepřenese mimo fci.
+
+            např.: viz 23_ARG_Pass_by_sharing.js
+
+            - úprava(modifikace) objektu se přenese mimo fci.
+            - změna objektu zůstane jen uvnitř fce.
+
+        4.3) Pass by reference (průchod pomocí odkazu)
+
+            - JS NEPODPORUJE!!!!!!!!!
+            = přiřazení hodnotu argumentu probíhá mimo fci.
+
+**Toto zatím v testu být nemělo**
+
+**Objekty**
+
+    = kolekce souvisejících dat a funkcí, obvykle se skládá z vlastností(proměnných uvnitř objektů) a metod
+
+    1) Tvoření
+
+        - základní způsoby:
+                - object initializer
+                - constructor function (konstrukční fce.)
+                - metoda Object.create()
+                - ze třídy (class)
+        
+        1.1) object initializer
+
+            = vytvoření objektu přiřazením {} do proměnné -> vznik prázdného objektu
+
+            const myObj = {}; <- zatim docela EZ well....
+
+            - do objektu přidáme hodnoty tak že nejdřív napíšeme propertyName(identifikátor něčeho co objekt obsahuje) a potom PropertyValue(nějaká hodnota/text co objekt obsahuje) následně položky obsažené v objektu musíme oddělovat ,
+
+            const myObj = {
+                jmeno: "Petr",
+                vek: 17,
+            }
+
+            tip - objekty mohou obsahovat i další objekty jako jejich vlastnosti
+
+            tip2 - , dávat i za poslední položku i přes to že tam už nic není, protože při pozdější úpravě(přidání dalších hodnot) by jsme na to mohli zapomenout = ZBYTEČNÁ CHYBA
+
+            např.: viz. 24_OBJ_Obj_initializer.js
+    
+        1.2) konstrukční fce.
+
+            = objekty jsou tvořeny pomocí fce. kde do () napíšeme nějaké hodnoty a ty se přidají do objektu a hlavně musíme použít klíčové slovo new než použijeme fci a hodnoty později obsažené v objektu musí být zapisovány pomocí this. např.: this.jmeno = jmeno_zadana_promena
+
+            tip - konstrukční fce. = konstruktor
+
+            např.:  function Person(firstName, lastName, age) {
+                        this.firstName = firstName;
+                        this.lastName = lastName;
+                        this.age = age;
+                        this.introduceYourself = function () {
+                            console.log("It is me Ma...", "Ehm I am " + this.firstName + " " + this.lastName);
+                    };
+                    }
+
+                    const person = new Person("John", "Smith", 30);
+
+                - definována fce. Person, fce. může mít definované parametry, které se budou předávat příslušným vlastnostem objektu, aby se vlastnosti správně přiřadily tak musí mít určeny správně klíčová slova, konstrukce objektu spočívá přidáním new před voláním fce.
+    
+    2) Přistupování k vlastnostem objektu
+
+        = přistupujeme k vlastnostem pomocí . <- tip - tomuto zp. se říká DOT NATION
+
+        např.:
+            console.log(person.firstName);
+            person.introduceYourself();
+        
+        - můžeme zobrazit i pomocí "závorkování" tzv. BRACKET NATION
+
+        např.: 
+            console.log(person["firstName"]);
+            person["introduceYourself"]();      <- well....WHY?!.....IDK
+
+**Da capo al fine....ZATÍM......**
