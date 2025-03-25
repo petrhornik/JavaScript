@@ -37,6 +37,7 @@ duck typing = duck test, informace o tom jak jsou udělané datové typy v JS
     Direct command exec
         1) v konzoli node - píšu přímo do konzole
         2) ve webu - v konzoli web prohlížeče v devtools
+        3) ze souboru - spouštíme soubor pomocí node
 
     - scripty se spouští postupně dle toho jak jdou v HTML za sebou
 
@@ -57,9 +58,9 @@ console = interakce s JS konzolí
 
     console.log("TEXT"); = vypisuje text do konzole
 
-    console.error() = jen mění barvu
+    console.error() = slouží specificky pro výpis chyb
 
-    console.warn()
+    console.warn() = podobné jako error
 
 // = komentář
 /*TEXT*/  = - | | - , můžeme ho psát i na více řádků
@@ -102,7 +103,7 @@ var = starší verze pro starší prohlížeče(IE), dnes už nepoužívat pokud
 
 ---PROMENNE SCOPES---
 
-- kód se může "rozdělit" do jednotlivých částí(bloků/scopů)
+- kód se může "rozdělit" do jednotlivých částí(bloků/scopů), buď se nachází v "globálním" kódu nebo je uzavřen do {} či nějaké funkce
 - např.: vhodné pro oddělování proměnných
 
 - druhy: script, class, function, block {}
@@ -147,6 +148,8 @@ např.:      let t = undefined;
 *null*
 = speciální typ pro objekty definující že objekt je "nic"(nic nenastaveno), objekt není proměnnou nebo na něj není nastaven pointer(odkaz)
 
+-není identifikátor vlastnosti globálního objektu, jako může být undefined. Namísto toho null vyjadřuje nedostatek identifikace, což znamená, že proměnná neukazuje na žádný objekt.
+
 např.:  let car = null;
         let bestObjectEver = null;
 
@@ -161,14 +164,14 @@ pie = "Yumy!" <- zde se číslo změní na string
 
 -- Kontrola typu dat --
 
-typeoff = vypíše co proměnná obsahuje za data
+typeoff = vypíše co proměnná obsahuje za druh data/hodnot
 
 např.: 
 
 let pie = 3.1415;
 console.log(typeof pie); <- vystup bude number(data jsou číselného typu)
 
-let myName = "Dice Sensei";
+let myName = "Erik";
 console.log(typeof myName); <- vystup bude string(data jsou typu string(prostý text))
 
 -- Pokud proměnná neexistuje --
@@ -281,7 +284,7 @@ např.:  1 === 1; rovno
 
 4) new line (nový řádek)
 
-    = pokud chceme aby měl strig více řádků umístíme do textu \n
+    = pokud chceme aby měl string více řádků umístíme do textu \n
 
     např.:  > let text = "Ahoj\njak je?";
             Ahoj
@@ -371,7 +374,7 @@ např.:  1 === 1; rovno
                 > numbers.length = 6;
                 výstup: [ 1, 2, 3, 4, 5, <1 empty item> ]
 
-    1.2) manipulace s elementy **- DOPSAT!!!!!**
+    1.2) manipulace s elementy
 
         - položky můžeme i přenastavovat i když už jsou určené
 
@@ -427,7 +430,9 @@ např.:  1 === 1; rovno
                     console.log(newArray.slice(2, 4))
                     výstup: [ 'apocalypse', 'Toyota' ]
 
-        1.3.4)
+        1.3.4) .reverse()
+        
+            = prvky v arrayi se vypíšou od konce(inverze)
 
 
         1.3.5) .sort()
@@ -465,7 +470,7 @@ např.:  1 === 1; rovno
             = kontrola existence klíčového prvky s názvem
 
         2.2.3) .size
-
+            = vypíše počet položek obsažených v mapě
 
         2.2.4) .delete
 
@@ -482,6 +487,9 @@ např.:  1 === 1; rovno
                 
                 > pizzaMenu.clear();
                 výstup: Map(0) {}
+
+        2.2.6 .get()
+            = vypíše klíčový prvek dle názvu klíč. položky
 
 3) set
 
