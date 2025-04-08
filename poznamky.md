@@ -410,7 +410,15 @@ např.:  1 === 1; rovno
 
                 např.: carManufacturers.push("Tesla")
                         výstup: [ 'Toyota', 'Honda', 'Ford', 'Chevrolet', 'Tesla' ]
-        1.3.2) .pop()
+        
+        1.3.3) .unshift()
+
+            = přidá prvek na začátek arraye
+
+            např.: carManufacturers.unshift("Tesla")
+                        výstup: ['Tesla' , 'Toyota', 'Honda', 'Ford', 'Chevrolet']
+        
+        1.3.4) .pop()
 
             = z konce arraye prvek odstraní
 
@@ -422,7 +430,14 @@ např.:  1 === 1; rovno
                     carManufactuers.length -= 1
                     výpis: smaže poslední položku jelikož se zmenší celková délka
 
-        1.3.3) .slice()
+        1.3.5) .shift()
+
+            = odstraní 1. položku v arrayi
+
+            např.: carManufacturers.unshift(); <- smaže Toyotu
+                        výstup: [ 'Honda', 'Ford', 'Chevrolet', 'Tesla' ]
+
+        1.3.6) .slice()
 
             = vypíše jen konkrétní část arraye dle počáteční a koncové index hodnoty(stačí když je uvedena alespoň počáteční)
 
@@ -430,12 +445,12 @@ např.:  1 === 1; rovno
                     console.log(newArray.slice(2, 4))
                     výstup: [ 'apocalypse', 'Toyota' ]
 
-        1.3.4) .reverse()
+        1.3.7) .reverse()
         
             = prvky v arrayi se vypíšou od konce(inverze)
 
 
-        1.3.5) .sort()
+        1.3.8) .sort()
 
             = roztřídí to dané pole (dle abecedy s důrazem na velká a malá písmena či čísla velikostně apod.)
 
@@ -1120,32 +1135,37 @@ např.:  1 === 1; rovno
             např.: viz 23_ARG_Pass_by_sharing.js
 
             - úprava(modifikace) objektu se přenese mimo fci.
-            - změna objektu zůstane jen uvnitř fce.
+            - kompletní změna objektu zůstane jen uvnitř fce. z důvodu vytvoření nového objektu(bude obsahovat jen hodnoty obsažené v OBJ uvnitř fce. a to původní už ne) se stejným jménem POUZE V RÁMCI TÉ FUNCKE
 
         4.3) Pass by reference (průchod pomocí odkazu)
 
             - JS NEPODPORUJE!!!!!!!!!
             = přiřazení hodnotu argumentu probíhá mimo fci.
 
-**Toto zatím v testu být nemělo**
+tip - YAGNI(You aren't gonna need it) = princip co říká že by kód nemměl obsahovat cokoli co není nezbytně nutné
+    - 
 
 **Objekty**
 
-    = kolekce souvisejících dat a funkcí, obvykle se skládá z vlastností(proměnných uvnitř objektů) a metod
+    = kolekce souvisejících dat a funkcí, obvykle se skládá z vlastností(proměnných uvnitř objektů) a metod (např.: OBJ. osoba -> vlast.: jméno, věk, ...
+                                                                                                                                -> metody: jíst, spát, ...)
+
+    - 2 základní části  1) proměnná co na objekt odkazuje
+                        2) {} do kterých se zapisuje obsah objektu
 
     1) Tvoření
 
-        - základní způsoby:
+        - základní způsoby: <- požíváme hl. 2 první
                 - object initializer
                 - constructor function (konstrukční fce.)
-                - metoda Object.create()
+                - metoda Object.create() <- starší, dnes už se moc nepoužívá
                 - ze třídy (class)
         
         1.1) object initializer
 
             = vytvoření objektu přiřazením {} do proměnné -> vznik prázdného objektu
 
-            const myObj = {}; <- zatim docela EZ well....
+            const myObj = {}; <- zatim docela EZ well.... <- const se použije z důvodu aby se nezměnil odkaz na objekt(i přes const jde obsah měnit :D)
 
             - do objektu přidáme hodnoty tak že nejdřív napíšeme propertyName(identifikátor něčeho co objekt obsahuje) a potom PropertyValue(nějaká hodnota/text co objekt obsahuje) následně položky obsažené v objektu musíme oddělovat ,
 
@@ -1162,7 +1182,7 @@ např.:  1 === 1; rovno
     
         1.2) konstrukční fce.
 
-            = objekty jsou tvořeny pomocí fce. kde do () napíšeme nějaké hodnoty a ty se přidají do objektu a hlavně musíme použít klíčové slovo new než použijeme fci a hodnoty později obsažené v objektu musí být zapisovány pomocí this. např.: this.jmeno = jmeno_zadana_promena
+            = objekty jsou tvořeny pomocí fce. s předdefinovanýma hodnotama, kde do () napíšeme nějaké hodnoty a ty se přidají do objektu a hlavně musíme použít klíčové slovo new než použijeme fci a hodnoty později obsažené v objektu musí být zapisovány pomocí this. např.: this.jmeno = jmeno_zadana_promena
 
             tip - konstrukční fce. = konstruktor
 
@@ -1175,13 +1195,18 @@ např.:  1 === 1; rovno
                     };
                     }
 
-                    const person = new Person("John", "Smith", 30);
+                    const person = new Person("John", "Smith", 30); <- NEW!!!!!
 
                 - definována fce. Person, fce. může mít definované parametry, které se budou předávat příslušným vlastnostem objektu, aby se vlastnosti správně přiřadily tak musí mít určeny správně klíčová slova, konstrukce objektu spočívá přidáním new před voláním fce.
-    
+        
+        rozdíl mezi konstruktorem a initializerem je ten:
+    	    initializer = pokuj vypíšeme pomocí console.log() tak se vypíší {} a obsah uvnitř
+            konstruktor = -||- tak se vypíše NAZEV_FUNKCE{} a obsah uvnitř <- NAZEV_FUNKCE je náízefv konstrukční fce. které slouží jako template
+
     2) Přistupování k vlastnostem objektu
 
-        = přistupujeme k vlastnostem pomocí . <- tip - tomuto zp. se říká DOT NATION
+        = přistupujeme k vlastnostem pomocí . <- tip - tomuto zp. se říká DOT NATION(pomocí tečky vytahujeme položky z objektu a manipulujeme s nimi)
+        tip - dokonce i příkazy jako např. console jsou objekty (console.log() <- voláme funkci log z objektu console)
 
         např.:
             console.log(person.firstName);
@@ -1192,5 +1217,23 @@ např.:  1 === 1; rovno
         např.: 
             console.log(person["firstName"]);
             person["introduceYourself"]();      <- well....WHY?!.....IDK
+        
+        -s objekty můžeme manipulovat i v průběhu kódu(upravovat, mazat, přidávat) 28_OBJ_Obj_initializer_2.js
+        - u objektu NEEXISTUJÍ prázdné hodnoty, buď hodnota existuje a na všechno co v objektu není se vrací undefined
+        -v JS se mohu odkazovat na neexistující vlastnosti objektu, jelikož pokud ona vlastnost není obsažena v objektu, tak se vždy vrátí undefined
 
-**Da capo al fine....ZATÍM......**
+    3) kopirovani
+
+        = pokud chceme za nějaký objekt připojit obsah jiného tak musím použít ...NAZEV_JINY_OBJEKT
+                -kopírování typu shallow copy = kopírovaní do 1. úrovně (např.: nemůžeme )
+
+        - JSON = způsob jednoduchého a lightweight zápisu dat pro přenos
+            jSON.stringyfy - převede objekt na JSON zápis
+            JSON.parse - převede JSON string zpět na objekt
+
+tip - druhy programování
+        1) strukturované 26_strukturovane_prog.js
+        2) objektové 27_OBJ_prog.js
+        3) funkcionální = všechno jsou funkce které spojujeme(chainujeme) za sebe
+    
+    
