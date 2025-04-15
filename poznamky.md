@@ -1205,19 +1205,25 @@ tip - YAGNI(You aren't gonna need it) = princip co říká že by kód nemměl o
 
     2) Přistupování k vlastnostem objektu
 
-        = přistupujeme k vlastnostem pomocí . <- tip - tomuto zp. se říká DOT NATION(pomocí tečky vytahujeme položky z objektu a manipulujeme s nimi)
-        tip - dokonce i příkazy jako např. console jsou objekty (console.log() <- voláme funkci log z objektu console)
+        2.1) DOT NOTATION
+            = přistupujeme k vlastnostem pomocí . <- tip - tomuto zp. se říká DOT NATION(pomocí tečky vytahujeme položky z objektu a manipulujeme s nimi)
+            tip - dokonce i příkazy jako např. console jsou objekty (console.log() <- voláme funkci log z objektu console)
 
-        např.:
-            console.log(person.firstName);
-            person.introduceYourself();
+            např.:
+                console.log(person.firstName);
+                person.introduceYourself();
         
-        - můžeme zobrazit i pomocí "závorkování" tzv. BRACKET NATION
+        2.2)BRACKET NOTATION
+            - můžeme zobrazit i pomocí "závorkování" tzv. BRACKET NATION
 
-        např.: 
-            console.log(person["firstName"]);
-            person["introduceYourself"]();      <- well....WHY?!.....IDK
+            např.: 
+                console.log(person["firstName"]);
+                person["introduceYourself"]();      <- well....WHY?!.....IDK
         
+        2.3)DESTRUCTURING
+            = rozbalování položek v objektu do jednotlivých samostatných proměnných
+            - viz: 008_objekty.js
+
         -s objekty můžeme manipulovat i v průběhu kódu(upravovat, mazat, přidávat) 28_OBJ_Obj_initializer_2.js
         - u objektu NEEXISTUJÍ prázdné hodnoty, buď hodnota existuje a na všechno co v objektu není se vrací undefined
         -v JS se mohu odkazovat na neexistující vlastnosti objektu, jelikož pokud ona vlastnost není obsažena v objektu, tak se vždy vrátí undefined
@@ -1227,9 +1233,63 @@ tip - YAGNI(You aren't gonna need it) = princip co říká že by kód nemměl o
         = pokud chceme za nějaký objekt připojit obsah jiného tak musím použít ...NAZEV_JINY_OBJEKT
                 -kopírování typu shallow copy = kopírovaní do 1. úrovně (např.: nemůžeme )
 
-        - JSON = způsob jednoduchého a lightweight zápisu dat pro přenos
+        - používáme metodu pass by sharing
+        3.1)spread
+            = vytvoříme nový objekt do kterého se zkopírují hodnoty z definovného objektu v {}
+                const car2 = {...car1}
+
+        3.2)JSON = způsob jednoduchého a lightweight zápisu dat pro přenos
             jSON.stringyfy - převede objekt na JSON zápis
             JSON.parse - převede JSON string zpět na objekt
+                const newObject = JSON.parse(JSON.stringify(myObject));
+
+    tip - mutable x imutalbe (změnitelný x nezměnitelný)
+        - pokud funkce mění původní kód(objekt, prom.,...) = function side effect
+        - pokud funkce nějak manipuluje s objektem, prom., atd. a následně upravené hodnoty vlaží do nové prom., objektu, atd. = není func. sideeffect
+
+    4) rovnost objektů
+        = objekty si nejsou rovny ani pokud mají stejný obsah jelikož jsou každý v jiném adres. bloku 
+        - musíme porovnávat jen obsahy objektů ne objekty jako takové
+        
+        4.1)JSON.stringify()
+            = převede celý obsah objektu na string
+            - takto lze porovnávat obsahy objektů
+            - PROBLM = vzniká nám template, oba ty stringy engine uvidí jako 2 různé templaty
+                     - stringy se čtou zleva doprava postupně, proto musíme mít při porovnávání položky na stejných místech, jinak i přes rovnost obsahu bude výsledek false
+
+        4.2) .isequal()
+            - z knihovny Lodash
+            = porovnává obsahy objektu se zanořením
+            PROBLM = náročnější na výkon
+
+    5) this
+        = klíčové "magické" slovo (kinda složité he said)
+        - mi použijeme jen ve 2 zp. v a mimo objekt
+        - vždy se za něj dosadí nějaký obsah
+
+        5.1) this v objektu
+            = dovoluje přistoupit na properties onoho objektu
+            - pokud si objekt voluá funkci tak název onoho objektu se zamění za this
+            - viz. 31_OBJ_this.js
+
+    6) druhy objektů
+
+        6.1) MAP
+            - viz. kolekce
+        6.2) SET
+            - viz. kolekce
+        6.3) ARRAY
+            - viz. kolekce
+        6.4)Date
+            =prezentuje čas v ms od začátku epochy(stejné jako Linux)
+            - reprezentuje datum a čas pomocí časových zón(time zones)
+            - obsahuje metody pro manipulaci s časem a datumem
+                
+                const now = new Date(); <- vytvoříme novou prom zobrazující aktuální čas
+                console.log(now.toString()); <- vypíšeme čas jako text
+                console.log(now.toLocaleString("cs-CZ")); <- definujeme jak se časový zápis zobrazí dle standardů oné země
+                console.log(now.toISOString()); <- všeobecný standard pro zápis času            
+            - timezone a locale se nastavují samostatně
 
 tip - druhy programování
         1) strukturované 26_strukturovane_prog.js
