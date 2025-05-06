@@ -1257,7 +1257,7 @@ tip - YAGNI(You aren't gonna need it) = princip co říká že by kód nemměl o
             - PROBLM = vzniká nám template, oba ty stringy engine uvidí jako 2 různé templaty
                      - stringy se čtou zleva doprava postupně, proto musíme mít při porovnávání položky na stejných místech, jinak i přes rovnost obsahu bude výsledek false
 
-        4.2) .isequal()
+        4.2) _.isequal()
             - z knihovny Lodash
             = porovnává obsahy objektu se zanořením
             PROBLM = náročnější na výkon
@@ -1291,9 +1291,62 @@ tip - YAGNI(You aren't gonna need it) = princip co říká že by kód nemměl o
                 console.log(now.toISOString()); <- všeobecný standard pro zápis času            
             - timezone a locale se nastavují samostatně
 
+            6.5) Globální objekt
+
+                = hlavní "všeobecný" objekt v node
+                - zobrazíme si ho pomocí příkazu this v node
+                - základní fce. pro chod JS
+    
+
 tip - druhy programování
         1) strukturované 26_strukturovane_prog.js
         2) objektové 27_OBJ_prog.js
         3) funkcionální = všechno jsou funkce které spojujeme(chainujeme) za sebe
     
+**Integrace JS do Web. Stránky**
+
+    - pro integraci JS potřebuji nějaký Engine pro spouštění JS 
+        + existují hromada API které prohlížeč obsahuje(knihovny pro JS obsažené ve web. browseru)
+            např.: Picture-in-Picture (např. video v obraze na YT), WebGL(2D a 3D render), Web Speech API(čtení webu pro slepé)
+    - každý tab v prohlížečí je "virtuálně" oddělen, každý tab se ovládá samostatně
+            - taby nemohou komunikovat mezi sebou či si vyměňovat informace
     
+    1) Webová úložiště
+
+        1.1) localStorage
+            = nikdy se nevymaže
+            
+
+        1.2) sessionStorage
+            = smaže se po zavření prohlížeče
+
+
+        1.3) IndexDB
+            = databázová paměť
+            - hl. pro prohlížečovou cache
+
+        prikazy pro 1.1 a 1.2
+
+            .setItem - přidání položek do paměti
+            .getItem - pro čtení položek v paměti
+            .removeItem - smaže položku v paměti
+            .clear - smaže celou paměť
+
+    viz. Cviceni_skola\integrace_web\02_TEST1
+
+    tip - na uložené info v prohlížeči se dá podívat přes devTools(F12) 
+        - github je postaven na reactu
+    
+    2) Window
+        = globální objekt pro web
+        - obsashuje dokument pro konkrétní stránku a funkce pro manipulování web. stránky a prohlížeč jako takový
+        - 
+
+        2.1) location
+            = URL adresa onoho webového okna
+            - pod 1 doménou může být mnoho "oken"
+
+            tip = # v url otevírá stránku u "Anchor tagu" - nějakého "většinou" nadpisu
+        
+        2.2) historie
+            
